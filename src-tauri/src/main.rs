@@ -8,6 +8,7 @@ use tauri::State;
 use walkdir::WalkDir;
 use std::time::UNIX_EPOCH;
 use tauri::Manager;
+use std::error::Error as StdError;
 
 // Database wrapper struct
 struct DbConnection(Mutex<Connection>);
@@ -60,6 +61,8 @@ impl serde::Serialize for Error {
     }
 }
 
+impl StdError for Error {}
+
 fn main() {
     tauri::Builder::default()
         .setup(|app| {
@@ -70,11 +73,40 @@ fn main() {
             let db_path = app_dir.join("file_explorer.sqlite3");
             println!("Database path: {:?}", db_path);
             
-            let conn = Connection::open(&db_path)?;
+            let mut conn = Connection::open(&db_path)?;
             println!("Database connection established");
             create_table(&conn)?;
             create_indexes(&conn)?;
             println!("Database tables and indexes created");
+            
+            // Check if database is empty and populate if needed
+            let count: i64 = conn.query_row("SELECT COUNT(*) FROM main_table", [], |row| row.get(0))?;
+            if count == 0 {
+                println!("Database is empty, populating with initial data...");
+                let path = "C:\\".to_string();
+                let tx = conn.transaction()?;
+                let skip_keywords = ["CloudStore", "OneDrive", "System Volume Information"];
+
+                for entry in WalkDir::new(&path)
+                    .follow_links(false)
+                    .into_iter()
+                    .filter_map(Result::ok)
+                    .filter(|e| !e.file_type().is_symlink())
+                    .filter(|e| {
+                        let path_str = e.path().display().to_string();
+                        !skip_keywords.iter().any(|k| path_str.contains(k))
+                    })
+                {
+                    if let Ok(file_meta) = get_file_meta(entry.path()) {
+                        if let Err(err) = insert_file_meta(&tx, &file_meta) {
+                            eprintln!("DB insert error for {:?}: {:?}", entry.path(), err);
+                        }
+                    }
+                }
+
+                tx.commit()?;
+                println!("Initial data population complete");
+            }
             
             app.manage(DbConnection(Mutex::new(conn)));
             Ok(())

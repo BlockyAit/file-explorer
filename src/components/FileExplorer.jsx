@@ -27,7 +27,8 @@ import {
   Search as SearchIcon,
   Refresh as RefreshIcon,
   Home as HomeIcon,
-  ArrowUpward as UpIcon
+  ArrowUpward as UpIcon,
+  Storage as StorageIcon
 } from '@mui/icons-material';
 
 const FileExplorer = () => {
@@ -124,6 +125,18 @@ const FileExplorer = () => {
     loadDirectory(currentDir);
   };
 
+  const populateDatabase = async () => {
+    setLoading(true);
+    try {
+      await invoke('transfer_to_sqlite', { path: 'C:\\' });
+      await loadDirectory(currentDir);
+    } catch (error) {
+      console.error('Error populating database:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const formatFileSize = (bytes) => {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;
@@ -195,6 +208,11 @@ const FileExplorer = () => {
         <Tooltip title="Refresh">
           <IconButton onClick={refresh}>
             <RefreshIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Populate Database">
+          <IconButton onClick={populateDatabase}>
+            <StorageIcon />
           </IconButton>
         </Tooltip>
         <Breadcrumbs aria-label="breadcrumb" style={{ flexGrow: 1 }}>
