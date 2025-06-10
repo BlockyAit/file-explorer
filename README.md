@@ -27,7 +27,7 @@ Cross-platform File Explorer built with [Tauri](https://tauri.app/), featuring a
 ### Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git
+   git clone https://github.com/BlockyAit/file-explorer.git
    cd YOUR-REPO
    ```
 2. Install dependencies:
@@ -47,7 +47,7 @@ To build a standalone executable for Windows:
 npm run tauri build
 ```
 - The `.exe` will be in `src-tauri/target/release/`
-- Installers (optional) are in `src-tauri/target/release/bundle/`
+- Installers are in `src-tauri/target/release/bundle/`
 
 ### Run the .exe
 Double-click the generated `.exe` file to launch the app without needing Node.js or npm.
@@ -57,7 +57,6 @@ Double-click the generated `.exe` file to launch the app without needing Node.js
 - [React](https://react.dev/)
 - [Vite](https://vitejs.dev/)
 - [Rust](https://www.rust-lang.org/)
-- [Material UI](https://mui.com/)
 
 ## License
 This project is licensed under the MIT License.
