@@ -1,9 +1,9 @@
 # File Explorer
 
-A modern, cross-platform File Explorer built with [Tauri](https://tauri.app/), featuring a React (Vite) frontend and a Rust backend. This application allows you to browse, search, and open files and folders on your system with a clean, desktop-like interface.
+Cross-platform File Explorer built with [Tauri](https://tauri.app/), featuring a React (Vite) frontend and a Rust backend. This application allows you to browse, search, and open files and folders on your system with a desktop-like interface.
 
 ## Features
-- Browse files and folders with a responsive UI
+- Browse files and folders
 - Search files by name and extension
 - Open files and folders directly from the app
 - View file details: name, directory, type, size, and last modified date
@@ -11,7 +11,8 @@ A modern, cross-platform File Explorer built with [Tauri](https://tauri.app/), f
 - Fast and lightweight, thanks to Tauri and Rust
 
 ## Screenshots
-<!-- Add screenshots here -->
+![image](https://github.com/user-attachments/assets/4cdfab13-196e-41df-a5a5-5b4ec0fd82cf)
+
 
 ## Getting Started
 
@@ -26,7 +27,7 @@ A modern, cross-platform File Explorer built with [Tauri](https://tauri.app/), f
 ### Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git
+   git clone https://github.com/BlockyAit/file-explorer.git
    cd YOUR-REPO
    ```
 2. Install dependencies:
@@ -46,7 +47,7 @@ To build a standalone executable for Windows:
 npm run tauri build
 ```
 - The `.exe` will be in `src-tauri/target/release/`
-- Installers (optional) are in `src-tauri/target/release/bundle/`
+- Installers are in `src-tauri/target/release/bundle/`
 
 ### Run the .exe
 Double-click the generated `.exe` file to launch the app without needing Node.js or npm.
@@ -56,7 +57,6 @@ Double-click the generated `.exe` file to launch the app without needing Node.js
 - [React](https://react.dev/)
 - [Vite](https://vitejs.dev/)
 - [Rust](https://www.rust-lang.org/)
-- [Material UI](https://mui.com/)
 
 ## License
 This project is licensed under the MIT License.
