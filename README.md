@@ -1,9 +1,9 @@
 # File Explorer
 
-A modern, cross-platform File Explorer built with [Tauri](https://tauri.app/), featuring a React (Vite) frontend and a Rust backend. This application allows you to browse, search, and open files and folders on your system with a clean, desktop-like interface.
+Cross-platform File Explorer built with [Tauri](https://tauri.app/), featuring a React (Vite) frontend and a Rust backend. This application allows you to browse, search, and open files and folders on your system with a desktop-like interface.
 
 ## Features
-- Browse files and folders with a responsive UI
+- Browse files and folders
 - Search files by name and extension
 - Open files and folders directly from the app
 - View file details: name, directory, type, size, and last modified date
@@ -11,7 +11,8 @@ A modern, cross-platform File Explorer built with [Tauri](https://tauri.app/), f
 - Fast and lightweight, thanks to Tauri and Rust
 
 ## Screenshots
-<!-- Add screenshots here -->
+![image](https://github.com/user-attachments/assets/4cdfab13-196e-41df-a5a5-5b4ec0fd82cf)
+
 
 ## Getting Started
 
