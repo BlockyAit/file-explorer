@@ -1,5 +1,3 @@
-// src-tauri/src/main.rs
-
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use std::{fs, path::Path, sync::Mutex};
@@ -10,7 +8,6 @@ use std::time::UNIX_EPOCH;
 use tauri::Manager;
 use std::error::Error as StdError;
 
-// Database wrapper struct
 struct DbConnection(Mutex<Connection>);
 
 #[derive(Debug, serde::Serialize)]
@@ -22,7 +19,6 @@ struct FileMeta {
     modified: u64,
 }
 
-// Error handling
 #[derive(Debug)]
 enum Error {
     Io(std::io::Error),
@@ -68,7 +64,6 @@ fn main() {
         .setup(|app| {
             // Initialize database
             let app_dir = app.path_resolver().app_data_dir().unwrap();
-            println!("Creating database in: {:?}", app_dir);
             std::fs::create_dir_all(&app_dir)?;
             let db_path = app_dir.join("file_explorer.sqlite3");
             println!("Database path: {:?}", db_path);
@@ -277,7 +272,7 @@ fn open_file(path: String) -> Result<(), Error> {
         use std::os::windows::process::CommandExt;
         std::process::Command::new("cmd")
             .args(&["/C", "start", "", &path])
-            .creation_flags(0x08000000) // CREATE_NO_WINDOW
+            .creation_flags(0x08000000)
             .spawn()
             .map_err(|e| Error::Io(e))?;
     }
